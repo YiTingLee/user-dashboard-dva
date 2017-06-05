@@ -7,13 +7,16 @@ import { PAGE_SIZE } from '../../constants';
 
 function Users({ dispatch, list: dataSource, loading, total, page: current }) {
   function deleteHandler(id) {
-    console.warn(`TODO: ${id}`);
+    dispatch({
+      type: 'users/remove',
+      payload: id,
+    });
   }
 
-  function pageChangeHandler(page){
+  function pageChangeHandler(page) {
     dispatch(routerRedux.push({
       pathname: '/users',
-      query:{ page },
+      query: { page },
     }));
   }
 
@@ -73,7 +76,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
 function mapStateToProps(state) {
   const { list, total, page } = state.users;
   return {
-    loading:state.loading.models.users,
+    loading: state.loading.models.users,
     list,
     total,
     page,
